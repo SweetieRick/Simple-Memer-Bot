@@ -1,4 +1,4 @@
-./node_modules
-./.env
-./json.sqlite
-./slappey.json
+node_modules
+.env
+json.sqlite
+slappey.json
