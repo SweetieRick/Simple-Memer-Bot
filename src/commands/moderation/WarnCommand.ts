@@ -2,9 +2,6 @@ import { Message } from "discord.js";
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
 const Discord = require("discord.js");
-const fs = require("fs");
-const ms = require("ms");
-const db = require("quick.db");
 
 export default class WarnCommand extends BaseCommand {
   constructor() {

@@ -14,9 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
 const Discord = require("discord.js");
-const fs = require("fs");
-const ms = require("ms");
-const db = require("quick.db");
 class WarnCommand extends BaseCommand_1.default {
     constructor() {
         super("Warn", "moderation", []);

@@ -1,19 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-export var predictionsList = [
-  "you will die of terminal dankness",
-  "you will have a lovely gf ❤",
-  "you will receive free money from Mr. Beast",
-  "Shrek will bless you with his greatness",
-  "yOu ArE tHe ImPoStOR! I sEe yOu WiLl VeNt!",
-  "you will live a wonderful life 😘",
-  "you will be chosen for exploring Antartica",
-  "you will be considered a city hero",
-  "you will be healthy and you will grow as a perfect Shrekling",
-  "you.. no sorry the dev will run out of ideas 😞",
-  "Obi-Wan will take you as his apprendice",
-];
+const Sequelize = require("sequelize");
 
 export default class PredictCommand extends BaseCommand {
   constructor() {
@@ -21,6 +9,16 @@ export default class PredictCommand extends BaseCommand {
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
+    const sequelizeDB = Sequelize.models.sequelizeDB;
+    const Predictions = sequelizeDB.define("predictions", {
+      prediction_number: {
+        type: Sequelize.INTEGER,
+        unique: true,
+        allowNull: false,
+      },
+      description: Sequelize.TEXT,
+    });
+
     let embed = new MessageEmbed()
       .setAuthor("`Shrek predicts your future`")
       .setDescription(
@@ -29,7 +27,7 @@ export default class PredictCommand extends BaseCommand {
       .setColor(0xa3ae7e);
     message.channel.send(embed);
     const chosenpredit =
-      predictionsList[Math.floor(Math.random() * predictionsList.length)];
+      Predictions[Math.floor(Math.random() * Predictions.length)];
     let nextembed = new MessageEmbed()
       .setAuthor("Shrek predicted your future!")
       .setDescription(`In your future... ${chosenpredit}`)
