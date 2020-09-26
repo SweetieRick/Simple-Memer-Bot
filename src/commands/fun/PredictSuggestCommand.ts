@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import predictions from "../../commands/fun/PredictCommand";
+import predictionsList from "../../commands/fun/PredictCommand";
 
 export default class PredictCommandOutdated extends BaseCommand {
   constructor() {
@@ -11,8 +11,9 @@ export default class PredictCommandOutdated extends BaseCommand {
   async run(client: DiscordClient, message: Message, args: Array<string>) {
     if (args[1] === "add") {
       if (args[1] === "add" && args[2]) {
+        var predictions = predictions;
         var newpredict = args[2];
-        database.push("predictions", `${newpredict}`);
+        var nextarray = predictions.unshift(newpredict);
         let addedemb = new MessageEmbed()
           .setDescription(
             `✅ Successfully added a new prediction! Your prediction is "${newpredict}"`

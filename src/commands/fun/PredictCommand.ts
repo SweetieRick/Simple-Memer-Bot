@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-export var predictions = [
+export var predictionsList = [
   "you will die of terminal dankness",
   "you will have a lovely gf ❤",
   "you will receive free money from Mr. Beast",
@@ -29,7 +29,7 @@ export default class PredictCommand extends BaseCommand {
       .setColor(0xa3ae7e);
     message.channel.send(embed);
     const chosenpredit =
-      predictions[Math.floor(Math.random() * predictions.length)];
+      predictionsList[Math.floor(Math.random() * predictionsList.length)];
     let nextembed = new MessageEmbed()
       .setAuthor("Shrek predicted your future!")
       .setDescription(`In your future... ${chosenpredit}`)
