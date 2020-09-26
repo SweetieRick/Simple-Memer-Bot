@@ -1,7 +1,6 @@
 import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-const Sequelize = require("sequelize");
 
 export default class PredictCommand extends BaseCommand {
   constructor() {
@@ -9,16 +8,6 @@ export default class PredictCommand extends BaseCommand {
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
-    const sequelizeDB = Sequelize.models.sequelizeDB;
-    const Predictions = sequelizeDB.define("predictions", {
-      prediction_number: {
-        type: Sequelize.INTEGER,
-        unique: true,
-        allowNull: false,
-      },
-      description: Sequelize.TEXT,
-    });
-
     let embed = new MessageEmbed()
       .setAuthor("`Shrek predicts your future`")
       .setDescription(

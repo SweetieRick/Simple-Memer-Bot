@@ -13,11 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@keyv/mongo": "^1.1.0",
     "@types/node": "^14.11.1",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
-    "sequelize": "^6.3.5",
-    "sqlite3": "^5.0.0"
+    "keyv": "^4.0.3"
   },
   "devDependencies": {
     "ts-node": "^9.0.0",
