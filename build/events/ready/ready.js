@@ -16,7 +16,6 @@ const BaseEvent_1 = __importDefault(require("../../utils/structures/BaseEvent"))
 const client_1 = __importDefault(require("../../client/client"));
 const bot = new client_1.default();
 const Discord = require("discord.js");
-const Sequelize = require("sequelize");
 class ReadyEvent extends BaseEvent_1.default {
     constructor() {
         super("ready");
