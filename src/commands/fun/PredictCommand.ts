@@ -4,7 +4,7 @@ import DiscordClient from "../../client/client";
 
 export default class PredictCommand extends BaseCommand {
   constructor() {
-    super("PredictSuggest", "fun", ["predictsuggest", "predictsugg"]);
+    super("Predict", "fun", ["predict", "pred"]);
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
@@ -37,9 +37,27 @@ export default class PredictCommand extends BaseCommand {
             "You dummy, you can't see into Shrek's mind!"
           );
         }
-        message.member.send(
-          `Here there are all my predictions for now: ${Predictions}`
-        );
+        let viewemb = new MessageEmbed()
+          .setAuthor("Predictions: admin panel")
+          .setDescription(
+            `Here there are all my predictions for now: ${Predictions}, with a total of ${Predictions.length}`
+          )
+          .setColor(0xa3ae7e);
+        message.member.send(viewemb);
+        break;
+      case "help":
+        let helpemb = new MessageEmbed()
+          .setAuthor("Predictions: help page")
+          .setDescription(
+            `The predict command lets Shrek see into your future and give a verdict. Just do ${client.prefix}predict !`
+          )
+          .addField(
+            "Prediction suggestions",
+            `If you want to suggest a predict Shrek will say, just do ${client.prefix}predict add <description>. \n To make a good command follow these guidelines: \n • Start the predict with "you will..." \n • Don't put offensive content on the predict \n • Don't exceed the 80 caracters limit`
+          )
+          .setColor(0xa3ae7e)
+          .setFooter(`${message.author.tag}`);
+        message.channel.send(helpemb);
     }
     let embed = new MessageEmbed()
       .setAuthor("`Shrek predicts your future`")
