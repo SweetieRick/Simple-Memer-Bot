@@ -10,7 +10,6 @@ export default class PredictCommand extends BaseCommand {
   async run(client: DiscordClient, message: Message, args: Array<string>) {
     var Predictions = [
       "you will die of terminal dankness",
-      "you will have a lovely gf ❤",
       "you will receive free money from Mr. Beast",
       "Shrek will bless you with his greatness",
       "yOu ArE tHe ImPoStOR! I sEe yOu WiLl VeNt!",
@@ -20,12 +19,14 @@ export default class PredictCommand extends BaseCommand {
       "you will be healthy and you will grow as a perfect Shrekling",
       "you.. no sorry the dev will run out of ideas 😞... that's why you should do `s!predictsuggest <description>` in chat!",
       "Obi-Wan will take you as his apprendice",
+      "you will got to brazil",
     ];
+    /*
     switch (args[1]) {
       case "add":
         if (!args[2]) {
           return message.channel.send(
-            "Sorry, but for adding a predict you need to write `s!predict add <your predict>`. To see how to make a good predict run `s!predict help`"
+            "Sorry, but for adding a predict you need to write `s!predict add <your predict>`. To see how to make a good predict write `s!predict help`"
           );
         }
         var newpredict = args[2];
@@ -58,7 +59,9 @@ export default class PredictCommand extends BaseCommand {
           .setColor(0xa3ae7e)
           .setFooter(`${message.author.tag}`);
         message.channel.send(helpemb);
-    }
+        break;
+    } */
+
     let embed = new MessageEmbed()
       .setAuthor("`Shrek predicts your future`")
       .setDescription(
