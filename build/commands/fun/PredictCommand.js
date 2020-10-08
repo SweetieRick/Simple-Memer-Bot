@@ -14,106 +14,71 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
-const database = mongoose.connection;
-database.on("error", console.error.bind(console, "connection error:"));
-database.once("open", function () {
-    console.log("DATABASE: Connected new mongoDB database on PredictCommand");
-});
-const predictionsSchema = new mongoose.Schema({
-    description: String,
-});
-const Prediction = mongoose.model("prediction", predictionsSchema);
 class PredictCommand extends BaseCommand_1.default {
     constructor() {
-        super("Predict", "fun", ["predict"]);
+        super("Predict", "fun", ["predict", "pred"]);
     }
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
+            var Predictions = [
+                "you will die of terminal dankness",
+                "you will receive free money from Mr. Beast",
+                "Shrek will bless you with his greatness",
+                "yOu ArE tHe ImPoStOR! I sEe yOu WiLl VeNt!",
+                "you will live a wonderful life 😘",
+                "you will be chosen for exploring Antartica",
+                "you will be considered a city hero",
+                "you will be healthy and you will grow as a perfect Shrekling",
+                "you.. no sorry the dev will run out of ideas 😞... that's why you should do `s!predictsuggest <description>` in chat!",
+                "Obi-Wan will take you as his apprendice",
+                "you will got to brazil",
+            ];
+            /*
+            switch (args[1]) {
+              case "add":
+                if (!args[2]) {
+                  return message.channel.send(
+                    "Sorry, but for adding a predict you need to write `s!predict add <your predict>`. To see how to make a good predict write `s!predict help`"
+                  );
+                }
+                var newpredict = args[2];
+                Predictions.push(newpredict);
+                break;
+              case "viewall":
+                if (!message.member.hasPermission("ADMINISTRATOR")) {
+                  return message.channel.send(
+                    "You dummy, you can't see into Shrek's mind!"
+                  );
+                }
+                let viewemb = new MessageEmbed()
+                  .setAuthor("Predictions: admin panel")
+                  .setDescription(
+                    `Here there are all my predictions for now: ${Predictions}, with a total of ${Predictions.length}`
+                  )
+                  .setColor(0xa3ae7e);
+                message.member.send(viewemb);
+                break;
+              case "help":
+                let helpemb = new MessageEmbed()
+                  .setAuthor("Predictions: help page")
+                  .setDescription(
+                    `The predict command lets Shrek see into your future and give a verdict. Just do ${client.prefix}predict !`
+                  )
+                  .addField(
+                    "Prediction suggestions",
+                    `If you want to suggest a predict Shrek will say, just do ${client.prefix}predict add <description>. \n To make a good command follow these guidelines: \n • Start the predict with "you will..." \n • Don't put offensive content on the predict \n • Don't exceed the 80 caracters limit`
+                  )
+                  .setColor(0xa3ae7e)
+                  .setFooter(`${message.author.tag}`);
+                message.channel.send(helpemb);
+                break;
+            } */
             let embed = new discord_js_1.MessageEmbed()
                 .setAuthor("`Shrek predicts your future`")
                 .setDescription(`🔮 Hold up a second ${message.author}, Shrek is looking in your future...`)
                 .setColor(0xa3ae7e);
             message.channel.send(embed);
-            // ? I will massively add those default vars and add them to the database
-            var pr1 = new Prediction({
-                description: "you will die of terminal dankness",
-            });
-            var pr2 = new Prediction({ description: "you will have a lovely gf ❤" });
-            var pr3 = new Prediction({
-                description: "you will receive free money from Mr. Beast",
-            });
-            var pr4 = new Prediction({
-                description: "Shrek will bless you with his greatness",
-            });
-            var pr5 = new Prediction({
-                description: "yOu ArE tHe ImPoStOR! I sEe yOu WiLl VeNt!",
-            });
-            var pr6 = new Prediction({
-                description: "you will live a wonderful life 😘",
-            });
-            var pr7 = new Prediction({
-                description: "you will be chosen for exploring Antartica",
-            });
-            var pr8 = new Prediction({
-                description: "you will be considered a city hero",
-            });
-            var pr9 = new Prediction({
-                description: "you will be healthy and you will grow as a perfect Shrekling",
-            });
-            var pr10 = new Prediction({
-                description: "you.. no sorry the dev will run out of ideas 😞... that's why you should do `s!predictsuggest <description>` in chat!",
-            });
-            var pr11 = new Prediction({
-                description: "Obi-Wan will take you as his apprendice",
-            });
-            pr1.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr2.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr3.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr4.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr5.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr6.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr7.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr8.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr9.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr10.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            pr11.save(function (err) {
-                if (err)
-                    return console.error(err);
-            });
-            // ! This is a pain in the butt to load, so in future releases I will add a more efficent way to add them to DB
-            const chosenpredit = predictionsSchema.find[Math.floor(Math.random() * predictionsSchema.all)];
+            const chosenpredit = Predictions.find[Math.floor(Math.random() * Predictions.length)];
             let nextembed = new discord_js_1.MessageEmbed()
                 .setAuthor("Shrek predicted your future!")
                 .setDescription(`In your future... ${chosenpredit}`)
