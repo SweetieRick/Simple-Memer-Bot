@@ -8,7 +8,7 @@ export default class PredictCommand extends BaseCommand {
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
-    var Predictions = [
+    const predictions = [
       "you will die of terminal dankness",
       "you will receive free money from Mr. Beast",
       "Shrek will bless you with his greatness",
@@ -63,18 +63,32 @@ export default class PredictCommand extends BaseCommand {
     } */
 
     let embed = new MessageEmbed()
-      .setAuthor("`Shrek predicts your future`")
+      .setAuthor("Shrek predicts your future")
       .setDescription(
         `🔮 Hold up a second ${message.author}, Shrek is looking in your future...`
       )
       .setColor(0xa3ae7e);
     message.channel.send(embed);
-    const chosenpredit =
-      Predictions.find[Math.floor(Math.random() * Predictions.length)];
-    let nextembed = new MessageEmbed()
-      .setAuthor("Shrek predicted your future!")
-      .setDescription(`In your future... ${chosenpredit}`)
-      .setColor(0xa3ae7e);
-    message.channel.send(nextembed);
+    function random() {
+      Math.floor[Math.random() * predictions.length];
+    }
+    const chosenpredit = predictions.find(random);
+    if (typeof chosenpredit === "string") {
+      let nextembed = new MessageEmbed()
+        .setAuthor("Shrek predicted your future!")
+        .setDescription(`In your future... ${chosenpredit}`)
+        .setColor(0xa3ae7e);
+      message.channel.send(nextembed);
+    }
+    if (typeof chosenpredit === "undefined") {
+      let erremb = new MessageEmbed()
+        .setAuthor("An error happened")
+        .setDescription(`The error code is 'undefined'`)
+        .setFooter(
+          "Please report this error to the developers with error code 0x1200"
+        )
+        .setColor("RED");
+      message.channel.send(erremb);
+    }
   }
 }

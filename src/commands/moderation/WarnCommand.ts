@@ -9,6 +9,11 @@ export default class WarnCommand extends BaseCommand {
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
+    if (!args[1]) {
+      message.channel.send("Please be sure to mention a person to warn");
+    }
+    const target = args[2];
+
     /*
     if (!message.member.hasPermission("ADMINISTRATOR")) {
       return message.channel.send(
