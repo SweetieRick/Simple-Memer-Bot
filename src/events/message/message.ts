@@ -23,14 +23,16 @@ export default class MessageEvent extends BaseEvent {
       let emb = new MessageEmbed()
         .setAuthor("Hey there disciple! I am the Swamp Overseer!")
         .setDescription(
-          `As you invoked me, now you can see the stuff I can do. To start off, you should see what commands I can run by saying "${client.prefix}help". If you want more info about me, just run "${client.prefix}info". Apart all, be sure to have fun trying me!`
+          `As you invoked me, now you can see the stuff I can do. To start off, you should see what commands I can run by saying **${client.prefix}help**. If you want more info about me, just run **${client.prefix}info**. Apart all, be sure to have fun trying me!`
         )
         .addField("What is my prefix?", `${client.prefix}`)
-        .setImage(
-          "https://discordapp.com/channels/@me/667756960141148165/759335532601016353"
-        )
+        .addField("Bot library", "Discord.js 12.3.2")
+        .addField("Version", "1.8")
+        .addField("GitHub branch", "master")
         .setColor(0xa3ae7e)
-        .setFooter("Bot made by SweetieRick");
+        .setFooter(
+          "Bot made by SweetieRick. This bot is a special version of the known bot SimpleMemerBot made only for this server!"
+        );
       message.channel.send(emb);
     }
   }

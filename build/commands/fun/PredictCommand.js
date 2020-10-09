@@ -42,7 +42,7 @@ class PredictCommand extends BaseCommand_1.default {
                   );
                 }
                 var newpredict = args[2];
-                Predictions.push(newpredict);
+                predictions.push(newpredict);
                 break;
               case "viewall":
                 if (!message.member.hasPermission("ADMINISTRATOR")) {
@@ -53,7 +53,7 @@ class PredictCommand extends BaseCommand_1.default {
                 let viewemb = new MessageEmbed()
                   .setAuthor("Predictions: admin panel")
                   .setDescription(
-                    `Here there are all my predictions for now: ${Predictions}, with a total of ${Predictions.length}`
+                    `Here there are all my predictions for now: ${predictions}, with a total of ${predictions.length}`
                   )
                   .setColor(0xa3ae7e);
                 message.member.send(viewemb);
