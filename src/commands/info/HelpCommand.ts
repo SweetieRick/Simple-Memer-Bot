@@ -13,19 +13,20 @@ export default class HelpCommand extends BaseCommand {
       .setDescription(
         `Hey there! I am the Swamp Overseer and I am the protector of the swamp. I help Shrek keeping the church alive and holy as always. Try doing ${client.prefix}commands to see what I can do! Also, don't forget to pray your god Shek with ${client.prefix}pray !`
       )
-      .addField("📬 Info Commands", `s!help`, true)
-      .addField("👮‍♀ Moderation Commands", `s!warn`, true)
-      .addField("😂 Fun Commands", `s!predict`, true)
+      .addField("📬 Info Commands", `${client.prefix}help`, true)
+      .addField("👮‍♀ Moderation Commands", `${client.prefix}warn`, true)
+      .addField("😂 Fun Commands", `${client.prefix}predict`, true)
       .addField(
         "⚙️ Utility Commands",
         `${client.prefix}nightwatch, ${client.prefix}onlinemode`,
         true
       )
-      .addField("🔐 Developer Reserved", `s!test, s!showtable`, true)
-      .setColor(0xa3ae7e)
-      .setFooter(
-        "Bot made by SweetieRick, check me out [here](https://discord.gg/8BrJz3E)"
-      );
+      .addField(
+        "🔐 Developer Reserved",
+        `${client.prefix}test, ${client.prefix}showtable`,
+        true
+      )
+      .setColor(0xa3ae7e);
     message.channel.send(embed);
   }
 }
