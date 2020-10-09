@@ -20,6 +20,10 @@ class WarnCommand extends BaseCommand_1.default {
     }
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!args[1]) {
+                message.channel.send("Please be sure to mention a person to warn");
+            }
+            const target = args[2];
             /*
             if (!message.member.hasPermission("ADMINISTRATOR")) {
               return message.channel.send(

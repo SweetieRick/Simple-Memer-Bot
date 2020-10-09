@@ -78,10 +78,8 @@ class PredictCommand extends BaseCommand_1.default {
                 .setDescription(`🔮 Hold up a second ${message.author}, Shrek is looking in your future...`)
                 .setColor(0xa3ae7e);
             message.channel.send(embed);
-            function random() {
-                Math.floor[Math.random() * predictions.length];
-            }
-            const chosenpredit = predictions.find(random);
+            var chosenpredit = predictions[Math.floor(Math.random() * predictions.length)];
+            console.log(`> Chosen predict debug: type ${chosenpredit}`);
             if (typeof chosenpredit === "string") {
                 let nextembed = new discord_js_1.MessageEmbed()
                     .setAuthor("Shrek predicted your future!")

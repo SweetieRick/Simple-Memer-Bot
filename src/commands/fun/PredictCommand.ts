@@ -69,10 +69,9 @@ export default class PredictCommand extends BaseCommand {
       )
       .setColor(0xa3ae7e);
     message.channel.send(embed);
-    function random() {
-      Math.floor[Math.random() * predictions.length];
-    }
-    const chosenpredit = predictions.find(random);
+    var chosenpredit =
+      predictions[Math.floor(Math.random() * predictions.length)];
+    console.log(`> Chosen predict debug: type ${chosenpredit}`);
     if (typeof chosenpredit === "string") {
       let nextembed = new MessageEmbed()
         .setAuthor("Shrek predicted your future!")
