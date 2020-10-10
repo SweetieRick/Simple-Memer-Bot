@@ -13,6 +13,9 @@
 
 ## ⬇️ Install
 
+You can either invite the bot [here](https://discordapp.com/oauth2/authorize?client_id=764503316352466984&scope=bot&permissions=738577479)
+or clone the repo and make some code out of it!
+
 (⚠️ Warning: you might want to use [Visual Studio Code](https://code.visualstudio.com) to follow this process!)
 With [npm](https://npmjs.org/) and [git](https://git-scm.com) installed on your device,
 
