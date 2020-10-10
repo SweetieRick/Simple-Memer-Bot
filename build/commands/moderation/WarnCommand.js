@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const discord_js_1 = require("discord.js");
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
 const Discord = require("discord.js");
 class WarnCommand extends BaseCommand_1.default {
@@ -23,7 +24,13 @@ class WarnCommand extends BaseCommand_1.default {
             if (!args[1]) {
                 message.channel.send("Please be sure to mention a person to warn");
             }
-            const target = args[2];
+            if (args[1]) {
+                const target = args[1];
+                let emb = new discord_js_1.MessageEmbed()
+                    .setAuthor(`${message.author.tag} warned ${target}!`)
+                    .setColor("YELLOW");
+                message.channel.send(emb);
+            }
             /*
             if (!message.member.hasPermission("ADMINISTRATOR")) {
               return message.channel.send(

@@ -29,6 +29,7 @@ export default class MessageEvent extends BaseEvent {
         .addField("Bot library", "Discord.js 12.3.2")
         .addField("Version", "1.8")
         .addField("GitHub branch", "master")
+        .addField("Special thanks to", "TheRealJT for contributing")
         .setColor(0xa3ae7e)
         .setFooter(
           "Bot made by SweetieRick. This bot is a special version of the known bot SimpleMemerBot made only for this server!"
