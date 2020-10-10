@@ -21,4 +21,25 @@ client.on("ready", () => {
   console.log(`Client logged in as ${client.user} at ${date}`);
 });
 
+client.on("error", () => {
+  console.log(console.error());
+});
+
+client.on("message", (message) => {
+  if (!message.content.startsWith(PREFIX) || message.author.bot) return;
+
+  const args = message.content.slice(PREFIX.length).trim().split(/ +/);
+  const commandName = args.shift().toLowerCase();
+  const command = client.commands.get(commandName);
+
+  if (!client.commands.has(commandName)) return;
+
+  try {
+    command.execute(message, args);
+  } catch (error) {
+    console.error(error);
+    message.reply("there was an error trying to execute that command!");
+  }
+});
+
 client.login(TOKEN);
