@@ -12,25 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
-class WarnCommand extends BaseCommand_1.default {
+class FSpamCommand extends BaseCommand_1.default {
     constructor() {
-        super('Warn', 'moderation', ['warn', 'w']);
+        super('FSpam', 'fun', ['f', 'pressf']);
     }
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = message.mentions.members.first().user.username;
-            const dmuser = message.mentions.members.first();
-            if (user) {
-                let emb = new discord_js_1.MessageEmbed().setAuthor(`${message.author.username} warned ${user}!`).setColor('YELLOW');
-                message.channel.send(emb);
-                dmuser.send(`You have been warned by ${message.author.username}`);
+            // Sleep function
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
             }
-            else {
-                yield message.channel.send('The user you mentioned is not valid!');
+            // F loop 
+            var i;
+            for (i = 1; i < 6; i++) {
+                message.channel.send('F');
             }
         });
     }
 }
-exports.default = WarnCommand;
+exports.default = FSpamCommand;

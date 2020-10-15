@@ -9,10 +9,11 @@ export default class WarnCommand extends BaseCommand {
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
     const user = message.mentions.members.first().user.username
+    const dmuser = message.mentions.members.first()
     if (user) {
       let emb = new MessageEmbed().setAuthor(`${message.author.username} warned ${user}!`).setColor('YELLOW')
       message.channel.send(emb)
-      // TODO Make the bot DM the victim
+      dmuser.send(`You have been warned by ${message.author.username}`)
     } else {
       await message.channel.send('The user you mentioned is not valid!')
     }
