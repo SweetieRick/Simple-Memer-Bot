@@ -1,5 +1,5 @@
 import BaseEvent from "../../utils/structures/BaseEvent";
-import { Message, MessageEmbed, MessageMentions } from "discord.js";
+import { Message, MessageAttachment, MessageEmbed, MessageMentions } from "discord.js";
 import DiscordClient from "../../client/client";
 
 export default class MessageEvent extends BaseEvent {
@@ -8,6 +8,8 @@ export default class MessageEvent extends BaseEvent {
   }
 
   async run(client: DiscordClient, message: Message) {
+
+    // ? Command Handling
     if (message.author.bot) return;
     if (message.content.startsWith(client.prefix)) {
       const [cmdName, ...cmdArgs] = message.content
@@ -19,6 +21,8 @@ export default class MessageEvent extends BaseEvent {
         command.run(client, message, cmdArgs);
       }
     }
+
+    // ? Help message on mention
     if (message.mentions.has(client.user)) {
       let emb = new MessageEmbed()
         .setAuthor("Hey there disciple! I am the Swamp Overseer!")
@@ -35,6 +39,30 @@ export default class MessageEvent extends BaseEvent {
           "Bot made by SweetieRick. This bot is a special version of the known bot SimpleMemerBot made only for this server!"
         );
       message.channel.send(emb);
+    }
+
+
+    // ? Auto-response algorithm
+    switch (message.content.toLowerCase()) {
+      case 'i deserve coffee':
+        message.channel.send(`No ${message.author.username}, go back to work u dumbass`)
+        break;
+      case 'no u':
+        const unocard = new MessageAttachment('https://media.giphy.com/media/VF5ZXlzQ8VcMpgJr1G/giphy.gif')
+        message.channel.send(unocard)
+        break;
+      case 'pray shrek':
+        message.channel.send(":pray:")
+        break;
+      case 'i like my creation':
+        if (message.author.username === 'SweetieRick') {
+          return message.channel.send("Watch out, I may kill u")
+        } else {
+          return message.channel.send(":heart:")
+        }
+      case 'ur gay':
+        message.channel.send('https://test.rauf.workers.dev/?author=you+are+the+real+gay')
+        break;
     }
   }
 }

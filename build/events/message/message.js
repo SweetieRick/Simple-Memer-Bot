@@ -20,6 +20,7 @@ class MessageEvent extends BaseEvent_1.default {
     }
     run(client, message) {
         return __awaiter(this, void 0, void 0, function* () {
+            // ? Command Handling
             if (message.author.bot)
                 return;
             if (message.content.startsWith(client.prefix)) {
@@ -32,6 +33,7 @@ class MessageEvent extends BaseEvent_1.default {
                     command.run(client, message, cmdArgs);
                 }
             }
+            // ? Help message on mention
             if (message.mentions.has(client.user)) {
                 let emb = new discord_js_1.MessageEmbed()
                     .setAuthor("Hey there disciple! I am the Swamp Overseer!")
@@ -44,6 +46,29 @@ class MessageEvent extends BaseEvent_1.default {
                     .setColor(0xa3ae7e)
                     .setFooter("Bot made by SweetieRick. This bot is a special version of the known bot SimpleMemerBot made only for this server!");
                 message.channel.send(emb);
+            }
+            // ? Auto-response algorithm
+            switch (message.content.toLowerCase()) {
+                case 'i deserve coffee':
+                    message.channel.send(`No ${message.author.username}, go back to work u dumbass`);
+                    break;
+                case 'no u':
+                    const unocard = new discord_js_1.MessageAttachment('https://media.giphy.com/media/VF5ZXlzQ8VcMpgJr1G/giphy.gif');
+                    message.channel.send(unocard);
+                    break;
+                case 'pray shrek':
+                    message.channel.send(":pray:");
+                    break;
+                case 'i like my creation':
+                    if (message.author.username === 'SweetieRick') {
+                        return message.channel.send("Watch out, I may kill u");
+                    }
+                    else {
+                        return message.channel.send(":heart:");
+                    }
+                case 'ur gay':
+                    message.channel.send('https://test.rauf.workers.dev/?author=you+are+the+real+gay');
+                    break;
             }
         });
     }

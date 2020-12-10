@@ -14,11 +14,11 @@ export default class HelpCommand extends BaseCommand {
         `Hey there! I am the Swamp Overseer and I am the protector of the swamp. I help Shrek keeping the church alive and holy as always. Try doing ${client.prefix}commands to see what I can do! Also, don't forget to pray your god Shek with ${client.prefix}pray !`
       )
       .addField("📬 Info Commands", `${client.prefix}help`, true)
-      .addField("👮‍♀ Moderation Commands", `${client.prefix}warn`, true)
-      .addField("😂 Fun Commands", `${client.prefix}predict`, true)
+      .addField("👮‍♀ Moderation Commands", `${client.prefix}warn, ${client.prefix}prison`, true)
+      .addField("😂 Fun Commands", `${client.prefix}predict, ${client.prefix}pressf , ${client.prefix}emj <emoji name>`, true)
       .addField(
         "⚙️ Utility Commands",
-        `${client.prefix}nightwatch, ${client.prefix}onlinemode`,
+        `${client.prefix}nightwatch, ${client.prefix}onlinemode, ${client.prefix}adminpanel`,
         true
       )
       .addField(
