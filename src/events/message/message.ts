@@ -1,6 +1,8 @@
 import BaseEvent from "../../utils/structures/BaseEvent";
 import { Message, MessageAttachment, MessageEmbed, MessageMentions } from "discord.js";
 import DiscordClient from "../../client/client";
+const Enmap = require("enmap");
+
 
 export default class MessageEvent extends BaseEvent {
   constructor() {
@@ -8,6 +10,7 @@ export default class MessageEvent extends BaseEvent {
   }
 
   async run(client: DiscordClient, message: Message) {
+    client.levels = new Enmap({name: "levels"});
 
     // ? Command Handling
     if (message.author.bot) return;
@@ -20,6 +23,28 @@ export default class MessageEvent extends BaseEvent {
       if (command) {
         command.run(client, message, cmdArgs);
       }
+    }
+
+    // ? Initialization of leveling system
+    if (message.guild) {
+      let emb = new MessageEmbed()
+          .setAuthor(`Sup ${message.author.username}! Ready to level?`, `${message.author.displayAvatarURL({dynamic: true})}`)
+          .setDescription(`**How it works?** First, welcome here at ${message.guild.name}! From now on, you can receive rewards based on how much 
+          you chat in this server. Rewards may vary, from roles to premium perks, but still, chat and be rewarded! As you progress, you get cooler
+          and better rewards and access some features not available for normal members, such as private matchmaking, custom hoisted status, custom
+          channel request and much more! Thanks for joining, hope you enjoy your stay! Oh, when you level up, you will see it in <#786580309092335667>.`)
+          .setColor(0xa3ae7e)
+          .setFooter(`New entry to levelup system: ${message.author.username}#${message.author.discriminator}`)
+          .setTimestamp(new Date());
+      message.channel.send(emb)
+      const key = `${message.guild.id}-${message.author.id}`
+      client.levels.ensure(key, {
+        user: message.author.id,
+        guild: message.guild.id,
+        points: 0,
+        level: 1
+      });
+      client.levels.inc(key, "points")
     }
 
     // ? Help message on mention
