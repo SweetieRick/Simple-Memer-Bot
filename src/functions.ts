@@ -3,7 +3,7 @@ import DiscordClient from "./client/client";
 import BaseEvent from "./utils/structures/BaseEvent";
 
 const client = new DiscordClient({});
-const message = Message
+// const message = Message
 
 function createStableMessage(member) {
     try {
@@ -14,6 +14,10 @@ function createStableMessage(member) {
     }
   }
 
+
+/*
+ * @param {id} = value
+*/
 function getTextChannel(id, guild) {
     const logChannel = client.guilds.cache.find(channel => channel.id == '755135782573965374')
 
@@ -22,5 +26,17 @@ function getTextChannel(id, guild) {
     // if (!((logChannel): logChannel is TextChannel => logChannel.type === 'text')(logChannel)) return;
 }
 
+
+function getLastRestartDate() {
+  var startTimestamp;
+    if (!startTimestamp) {
+        startTimestamp = new Date();
+    }
+  return startTimestamp;
+}
+
+
+
 module.exports.createStableMessage = createStableMessage
 module.exports.getTextChannel = getTextChannel
+module.exports.getLastRestartDate = getLastRestartDate
