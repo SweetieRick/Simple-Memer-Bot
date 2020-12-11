@@ -23,11 +23,11 @@ class HelpCommand extends BaseCommand_1.default {
             let embed = new discord_js_1.MessageEmbed()
                 .setAuthor("The Swamp Overseer's")
                 .setDescription(`Hey there! I am the Swamp Overseer and I am the protector of the swamp. I help Shrek keeping the church alive and holy as always. Try doing ${client.prefix}commands to see what I can do! Also, don't forget to pray your god Shek with ${client.prefix}pray !`)
-                .addField("📬 Info Commands", `${client.prefix}help`, true)
+                .addField("📬 Info Commands", `${client.prefix}help, ${client.prefix}info`, true)
                 .addField("👮‍♀ Moderation Commands", `${client.prefix}warn, ${client.prefix}prison`, true)
-                .addField("😂 Fun Commands", `${client.prefix}predict, ${client.prefix}pressf , ${client.prefix}emj <emoji name>`, true)
+                .addField("😂 Fun Commands", `${client.prefix}predict, ${client.prefix}pressf , ${client.prefix}emj <emoji name>, ${client.prefix}lvl`, true)
                 .addField("⚙️ Utility Commands", `${client.prefix}nightwatch, ${client.prefix}onlinemode, ${client.prefix}adminpanel`, true)
-                .addField("🔐 Developer Reserved", `${client.prefix}test, ${client.prefix}showtable`, true)
+                .addField("🔐 Developer Reserved", `${client.prefix}test, ${client.prefix}showtable, ${client.prefix}flush`, true)
                 .setColor(0xa3ae7e);
             message.channel.send(embed);
         });
