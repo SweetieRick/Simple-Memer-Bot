@@ -15,7 +15,8 @@ export default class HelpCommand extends BaseCommand {
       )
       .addField("📬 Info Commands", `${client.prefix}help, ${client.prefix}info`, true)
       .addField("👮‍♀ Moderation Commands", `${client.prefix}warn, ${client.prefix}prison`, true)
-      .addField("😂 Fun Commands", `${client.prefix}predict, ${client.prefix}pressf , ${client.prefix}emj <emoji name>, ${client.prefix}lvl`, true)
+      .addField("😂 Fun Commands", `${client.prefix}predict, ${client.prefix}pressf , ${client.prefix}emj <emoji name>, ${client.prefix}say <text>`, true)
+      .addField("⬆ Levelup Commands", `${client.prefix}lvl , ${client.prefix}leaderboard, ${client.prefix}setpoints, ${client.prefix}flush`)
       .addField(
         "⚙️ Utility Commands",
         `${client.prefix}nightwatch, ${client.prefix}onlinemode, ${client.prefix}adminpanel`,

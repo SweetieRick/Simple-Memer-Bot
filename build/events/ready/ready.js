@@ -23,9 +23,11 @@ class ReadyEvent extends BaseEvent_1.default {
     run(client, message) {
         return __awaiter(this, void 0, void 0, function* () {
             const daytime = new Date();
-            client.user.setActivity("Swamp Overseer | s!help", { type: "PLAYING" });
             client.user.setPresence({ status: "online" });
             console.log(`Bot logged in as ${client.user.username} at ${daytime}`);
+            setTimeout(() => {
+                client.user.setActivity("Guarding the swamp 24/7", { type: "PLAYING" });
+            }, 20000);
         });
     }
 }

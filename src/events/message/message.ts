@@ -1,7 +1,9 @@
 import BaseEvent from "../../utils/structures/BaseEvent";
 import { Message, MessageAttachment, MessageEmbed, MessageMentions, WebhookClient, TextChannel } from "discord.js";
 import DiscordClient from "../../client/client";
+import { setMaxListeners } from 'process';
 const Enmap = require("enmap");
+const chalk = require("chalk")
 
 
 export default class MessageEvent extends BaseEvent {
@@ -10,6 +12,10 @@ export default class MessageEvent extends BaseEvent {
   }
 
   async run(client: DiscordClient, message: Message) {
+    // This allows to put more listeners to a same client to avoid data leaks
+    // ! THIS MIGHT BE A PROBLEM WITH THE CODE
+    setMaxListeners(0)
+
     client.levels = new Enmap({name: "levels"});
 
     // ? Command Handling
@@ -130,5 +136,12 @@ export default class MessageEvent extends BaseEvent {
           message.channel.send("poggers")
         }
     }
+
+    process.on("UnhandledPromiseRejection", (e) => {
+      console.log(chalk.red("[!] ") + chalk.bgRed("UnhandledPromiseRejection: ") + e)
+    })
+    process.on("UnhandledPromiseRejectionWarning", (e) => {
+      console.log(chalk.yellow("[⚠️] ") + chalk.bgYellow("UnhandledPromiseRejection: ") + e)
+    })
   }
 }

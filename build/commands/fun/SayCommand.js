@@ -14,27 +14,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
-const Enmap = require("enmap");
-class PointsCommand extends BaseCommand_1.default {
+class SayCommand extends BaseCommand_1.default {
     constructor() {
-        super('points', 'Levels', ["p", "level", "lvl"]);
+        super('say', 'fun', ['tell']);
     }
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            // We re-define the database key and ensure a entry for that user
-            const key = `${message.guild.id}-${message.author.id}`;
-            client.levels.ensure(key, {
-                user: message.author.id,
-                guild: message.guild.id,
-                points: 0,
-                level: 1
-            });
-            let emb = new discord_js_1.MessageEmbed()
-                .setDescription(`Yo ***${message.author.username}#${message.author.discriminator}***, you currently have **${client.levels.get(key, "points")}** points on level **${client.levels.get(key, "level")}** . Doin' great!`)
-                .setColor(0xa3ae7e);
-            // We send the stats straigh from database
-            message.channel.send(emb);
+            if (!message.member.roles.cache.has(process.env.JESTER_ROLE)) {
+                let noperms = new discord_js_1.MessageEmbed()
+                    .setDescription(`Yo man, this command requires the Jester role to be run! If you think this is an error, tell the owner of the server to review the configuration`)
+                    .setColor(0xa3ae7e);
+                yield message.channel.send(noperms);
+            }
+            else {
+                const phrase = args.join(" ");
+                if (!phrase) {
+                    let nophrase = new discord_js_1.MessageEmbed()
+                        .setDescription(`What should I say? Remember that you need to write the phrase after the command, like ` + "`" + `${client.prefix}say <text> ` + "`" + `for example`)
+                        .setColor(0xa3ae7e);
+                    yield message.channel.send(nophrase);
+                }
+                yield message.channel.send(phrase);
+            }
         });
     }
 }
-exports.default = PointsCommand;
+exports.default = SayCommand;

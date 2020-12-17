@@ -1,5 +1,6 @@
 import { Message } from "discord.js";
 import DiscordClient from "../../client/client";
+const chalk = require('chalk')
 
 export default abstract class BaseCommand {
   constructor(
@@ -18,7 +19,7 @@ export default abstract class BaseCommand {
     return this.aliases;
   }
 
-  abstract async run(
+  abstract run(
     client: DiscordClient,
     message: Message,
     args: Array<string> | null

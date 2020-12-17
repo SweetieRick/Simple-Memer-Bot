@@ -14,13 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseEvent_1 = __importDefault(require("../../utils/structures/BaseEvent"));
 const discord_js_1 = require("discord.js");
+const process_1 = require("process");
 const Enmap = require("enmap");
+const chalk = require("chalk");
 class MessageEvent extends BaseEvent_1.default {
     constructor() {
         super("message");
     }
     run(client, message) {
         return __awaiter(this, void 0, void 0, function* () {
+            // This allows to put more listeners to a same client to avoid data leaks
+            // ! THIS MIGHT BE A PROBLEM WITH THE CODE
+            process_1.setMaxListeners(0);
             client.levels = new Enmap({ name: "levels" });
             // ? Command Handling
             if (message.author.bot)
@@ -135,6 +140,12 @@ class MessageEvent extends BaseEvent_1.default {
                         message.channel.send("poggers");
                     }
             }
+            process.on("UnhandledPromiseRejection", (e) => {
+                console.log(chalk.red("[!] ") + chalk.bgRed("UnhandledPromiseRejection: ") + e);
+            });
+            process.on("UnhandledPromiseRejectionWarning", (e) => {
+                console.log(chalk.yellow("[⚠️] ") + chalk.bgYellow("UnhandledPromiseRejection: ") + e);
+            });
         });
     }
 }

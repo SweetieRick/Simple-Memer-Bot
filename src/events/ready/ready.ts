@@ -11,8 +11,12 @@ export default class ReadyEvent extends BaseEvent {
 
   async run(client: DiscordClient, message: Message) {
     const daytime = new Date();
-    client.user.setActivity("Swamp Overseer | s!help", { type: "PLAYING" });
     client.user.setPresence({ status: "online" });
     console.log(`Bot logged in as ${client.user.username} at ${daytime}`);
+
+    setTimeout(() => {
+      client.user.setActivity("Guarding the swamp 24/7", { type: "PLAYING" });
+    }, 20000)
+    
   }
 }

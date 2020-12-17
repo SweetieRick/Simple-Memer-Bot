@@ -20,6 +20,9 @@ export default class PredictCommand extends BaseCommand {
       "you.. no sorry the dev will run out of ideas 😞... that's why you should do `s!predictsuggest <description>` in chat!",
       "Obi-Wan will take you as his apprendice",
       "you will got to brazil",
+      "SweetieRick will explode the world",
+      "you will turn a nig_a mobile! Aahaha tranformable goes *brrrrr...*",
+      "you will cover yourself in ice"
     ];
     /*
     switch (args[1]) {

@@ -2,6 +2,7 @@ import { Client, ClientOptions, Collection } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import BaseCommand from '../utils/structures/BaseCommand';
 
+
 export default class DiscordClient extends Client {
 
   private _commands = new Collection<string, BaseCommand>();
