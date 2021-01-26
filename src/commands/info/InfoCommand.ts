@@ -1,6 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js';
 import BaseCommand from '../../utils/structures/BaseCommand';
 import DiscordClient from '../../client/client';
+import { info } from 'console';
 const functions = require('../../functions')
 
 export default class InfoCommand extends BaseCommand {
@@ -21,5 +22,6 @@ export default class InfoCommand extends BaseCommand {
         .addField("Commands", `${client.commands.array().length} loaded`)
         .setColor(0xa3ae7e)
         .setFooter("Bot made by SweetieRick. This bot is a special version of the known bot SimpleMemerBot made only for this server!");
+    message.channel.send(infos)
   }
 }

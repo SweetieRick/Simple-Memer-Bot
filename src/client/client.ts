@@ -9,6 +9,7 @@ export default class DiscordClient extends Client {
   private _events = new Collection<string, BaseEvent>();
   private _prefix: string = '!';
   levels: any;
+  economy: any;
 
   constructor(options?: ClientOptions) {
     super(options);

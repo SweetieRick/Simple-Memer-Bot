@@ -1,0 +1,9 @@
+{
+    "coinlosschance": 24,
+    "coinwinchance": 24,
+
+    "CoinEvents": {
+        "loss": 50,
+        "win": 100
+    }
+}

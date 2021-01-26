@@ -13,24 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
-class EmojiCommand extends BaseCommand_1.default {
+class WalletCommand extends BaseCommand_1.default {
     constructor() {
-        super('emoji', 'fun', ['ej', 'emj']);
+        super('wallet', 'economy', []);
     }
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            switch (args[0]) {
-                case 'nwodtleM':
-                    message.channel.send("<a:nwodtleM:763851515399897090>");
-                    break;
-                case 'banhammer':
-                    message.channel.send("<:banhammer_gulag:797031116573114399> Behold, the mighty ban hammer!");
-                    break;
-                case 'bonk':
-                    message.channel.send(":boom: <:banhammer_gulag:797031116573114399>");
-                    break;
-            }
+            message.channel.send('wallet command works');
         });
     }
 }
-exports.default = EmojiCommand;
+exports.default = WalletCommand;

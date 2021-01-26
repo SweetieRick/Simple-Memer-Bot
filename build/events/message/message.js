@@ -27,6 +27,7 @@ class MessageEvent extends BaseEvent_1.default {
             // ! THIS MIGHT BE A PROBLEM WITH THE CODE
             process_1.setMaxListeners(0);
             client.levels = new Enmap({ name: "levels" });
+            client.economy = new Enmap({ name: "economy" });
             // ? Command Handling
             if (message.author.bot)
                 return;
@@ -40,8 +41,13 @@ class MessageEvent extends BaseEvent_1.default {
                     command.run(client, message, cmdArgs);
                 }
             }
-            // ? Initialization of leveling system
+            // ? Initialization of leveling and economy system
             if (message.guild) {
+                /* * * * * * * * * * *
+                *
+                *  Here Starts the leveling system logic
+                *
+                * * * * * * * * * * */
                 /* let emb = new MessageEmbed()
                     .setAuthor(`Sup ${message.author.username}! Ready to level?`, `${message.author.displayAvatarURL({dynamic: true})}`)
                     .setDescription(`**How it works?** First, welcome here at ${message.guild.name}! From now on, you can receive rewards based on how much
@@ -63,6 +69,7 @@ class MessageEvent extends BaseEvent_1.default {
                     points: 0,
                     level: 1
                 });
+                // ? This increases points each message
                 client.levels.inc(key, "points");
                 // Checking last level! This basically does a square root of the points
                 // and multiplies by 0.1 to get the current amount of points
@@ -70,7 +77,7 @@ class MessageEvent extends BaseEvent_1.default {
                 const lastLevel = Math.floor(0.1 * Math.sqrt(client.levels.get(key, "points")));
                 // We see if the current level is higher: if it is, then we level up!
                 if (client.levels.get(key, "level") < lastLevel) {
-                    let emb = new discord_js_1.MessageEmbed().setDescription(`:tada: Congratz ${message.author.username}, your power grew of 1%, so now you are **${lastLevel}**% holy!`);
+                    let emb = new discord_js_1.MessageEmbed().setDescription(`:tada: Congratz ${message.author.username}, your power grew of 1%, so now you are **${lastLevel}**% holy!`).setColor(0x424549);
                     message.channel.send(emb);
                     // Sends a webhook to the levelup channel, * also cuz I am lazy *
                     const LevelHook = new discord_js_1.WebhookClient('786896998682722386', 'Iv2trO_fUviKhzHWR2uwCO0Mnh1x63_FeAs3wKY2IaThghHusHM2kVPcOi8aU9b7F0nd');
@@ -90,6 +97,63 @@ class MessageEvent extends BaseEvent_1.default {
                     LevelHook.send(randomMsg);
                     // Sets the points to current level
                     client.levels.set(key, lastLevel, "level");
+                }
+                /* * * * * * * * * * *
+                *
+                *  Here Starts the economy system logic
+                *
+                * * * * * * * * * * */
+                // Here we setup the database for the economy system
+                // We use the same key to avoid conflicts
+                client.economy.ensure(key, {
+                    user: message.author.id,
+                    guild: message.guild.id,
+                    coins: 200,
+                    diamonds: 0
+                });
+                // ? Here we define default settings for the economy system
+                var coinlosschance = 24;
+                var coinwinchance = 24;
+                var CoinEventLoss = 50;
+                var CoinEventWin = 100;
+                // ? Here we determine the chance of a coin loss to happen when chatting
+                var loosecoinChance = Math.floor[Math.random() * coinlosschance] + 1;
+                // Here we define some arrays to select a random message to send when an user gets a coin loss
+                var loosecoinMsg = [
+                    `SweetieRick left a banana on the floor and ${message.author.username} slipped on it. Dat <:GOLIRA:756492193015005236> even took ${CoinEventLoss} coins from his wallet!`,
+                    `${message.author.username} was robbed by a negga. Now from his wallet are missing ${CoinEventLoss} coins!`,
+                    `${message.author.username} is a big simp, so he donated all his ${CoinEventLoss} coins to Pokimane`,
+                    `${message.author.username} played too much and he lost ${CoinEventLoss} coins in illegal poker games`,
+                    `${message.author.username} was shot by a shameful comrade with a Dragunov. He was saved from the camp's medic in exchange of ${CoinEventLoss} coins`,
+                    `${message.author.username} was found in Shrek's hut. Shrek decided to spare him in echange of ${CoinEventLoss} coins`,
+                    `${message.author.username} hit the ground too hard. Bed was obstructed, so he lost ${CoinEventLoss} coins`,
+                    `${message.author.username} drowned in the swamp, so Shrek saved him and took away ${CoinEventLoss} coins from his wallet`
+                ];
+                var randomLooseMsg = loosecoinMsg[Math.floor(Math.random() * loosecoinMsg.length)];
+                // Here there is the logic for the actual coin loss
+                // This can be modified in the config and can be tweaked to be more or less rare to happen
+                // Also, the amount of coins to subtract are tweakable
+                if (loosecoinChance <= 4) {
+                    client.economy.dec(key, CoinEventLoss, "coins");
+                    message.channel.send(randomLooseMsg);
+                }
+                //? Here we determine the chance of a coin win to happen when chatting
+                var wincoinChance = Math.floor[Math.random() * coinwinchance] + 1;
+                // Here we define some arrays to select a random message to send when an user gets a coin win
+                var wincoinMsg = [
+                    `${message.author.username} found a lost wallet! There was ${CoinEventWin} coins inside`,
+                    `${message.author.username} looked under a rock and found ${CoinEventWin} coins`,
+                    `${message.author.username} was greeted by Shrek in his swamp with ${CoinEventWin} coins`,
+                    `While nerding on minecraft, ${message.author.username} found ${CoinEventWin} coins in a shipwreck`,
+                    `A nice commie shared his ${Math.floor(CoinEventWin * 2)} with ${message.author.username}, now they both have ${CoinEventWin} coins`
+                ];
+                var randomWinMsg = wincoinMsg[Math.floor(Math.random() * wincoinMsg.length)];
+                // Here there is the logic for the actual coin win
+                // This can be modified in the config and can be tweaked to be more or less rare to happen
+                // Also, the amount of coins to add to the wallet are tweakable
+                if (wincoinChance <= 6) {
+                    client.economy.inc(key, CoinEventWin, "coins");
+                    message.channel.send(randomWinMsg);
                 }
             }
             // ? Help message on mention
