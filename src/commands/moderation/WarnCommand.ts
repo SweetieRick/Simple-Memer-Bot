@@ -14,10 +14,11 @@ export default class WarnCommand extends BaseCommand {
 
     const user = message.mentions.members.first().user.username
     const dmuser = message.mentions.members.first()
+    const reason = args.slice(1).join(' ')
     if (user) {
-      let emb = new MessageEmbed().setAuthor(`***:white_check_mark: ${message.author.username} succesfully warned ${user}!`).setColor('YELLOW')
+      let emb = new MessageEmbed().setAuthor(`✅ ${message.author.username} succesfully warned ${user}!`).setColor('YELLOW')
       message.channel.send(emb)
-      dmuser.send(`You have been warned by ${message.author.username} in ${message.guild.name}`)
+      await dmuser.send(`You have been warned by ${message.author.username} in ${message.guild.name} for ${reason}`)
     } else {
       await message.channel.send('The user you mentioned is not valid!')
     }

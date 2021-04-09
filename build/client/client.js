@@ -7,6 +7,7 @@ class DiscordClient extends discord_js_1.Client {
         this._commands = new discord_js_1.Collection();
         this._events = new discord_js_1.Collection();
         this._prefix = '!';
+        this.cooldown = new discord_js_1.Collection();
     }
     get commands() { return this._commands; }
     get events() { return this._events; }

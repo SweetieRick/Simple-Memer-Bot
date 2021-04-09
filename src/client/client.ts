@@ -10,6 +10,7 @@ export default class DiscordClient extends Client {
   private _prefix: string = '!';
   levels: any;
   economy: any;
+  cooldown = new Collection();
 
   constructor(options?: ClientOptions) {
     super(options);

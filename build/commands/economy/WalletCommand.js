@@ -15,11 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const BaseCommand_1 = __importDefault(require("../../utils/structures/BaseCommand"));
 class WalletCommand extends BaseCommand_1.default {
     constructor() {
-        super('wallet', 'economy', []);
+        super('wallet', 'economy', ['bal', 'wallt']);
     }
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            message.channel.send('wallet command works');
+            const key = `${message.guild.id}-${message.author.id}`;
+            const networth = yield Math.floor(client.economy.get(key, "coins") * 1.6);
+            const diamonds = yield client.economy.get(key, "diamonds");
+            message.channel.send({
+                embed: {
+                    title: `${message.author.username}'s Wallet ~ :moneybag:`,
+                    description: `:coin: Balance: ${client.economy.get(key, "coins")} \n :dollar: Net-worth: ${networth} \n <a:shiny_diamond:829598127832432660> Diamonds: ${diamonds}`,
+                    color: 0xa3ae7e
+                }
+            });
         });
     }
 }

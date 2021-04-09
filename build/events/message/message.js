@@ -109,52 +109,13 @@ class MessageEvent extends BaseEvent_1.default {
                     user: message.author.id,
                     guild: message.guild.id,
                     coins: 200,
-                    diamonds: 0
+                    diamonds: 0,
+                    employed: false,
+                    items: {
+                        weed: 0,
+                        gun: 0
+                    }
                 });
-                // ? Here we define default settings for the economy system
-                var coinlosschance = 24;
-                var coinwinchance = 24;
-                var CoinEventLoss = 50;
-                var CoinEventWin = 100;
-                // ? Here we determine the chance of a coin loss to happen when chatting
-                var loosecoinChance = Math.floor[Math.random() * coinlosschance] + 1;
-                // Here we define some arrays to select a random message to send when an user gets a coin loss
-                var loosecoinMsg = [
-                    `SweetieRick left a banana on the floor and ${message.author.username} slipped on it. Dat <:GOLIRA:756492193015005236> even took ${CoinEventLoss} coins from his wallet!`,
-                    `${message.author.username} was robbed by a negga. Now from his wallet are missing ${CoinEventLoss} coins!`,
-                    `${message.author.username} is a big simp, so he donated all his ${CoinEventLoss} coins to Pokimane`,
-                    `${message.author.username} played too much and he lost ${CoinEventLoss} coins in illegal poker games`,
-                    `${message.author.username} was shot by a shameful comrade with a Dragunov. He was saved from the camp's medic in exchange of ${CoinEventLoss} coins`,
-                    `${message.author.username} was found in Shrek's hut. Shrek decided to spare him in echange of ${CoinEventLoss} coins`,
-                    `${message.author.username} hit the ground too hard. Bed was obstructed, so he lost ${CoinEventLoss} coins`,
-                    `${message.author.username} drowned in the swamp, so Shrek saved him and took away ${CoinEventLoss} coins from his wallet`
-                ];
-                var randomLooseMsg = loosecoinMsg[Math.floor(Math.random() * loosecoinMsg.length)];
-                // Here there is the logic for the actual coin loss
-                // This can be modified in the config and can be tweaked to be more or less rare to happen
-                // Also, the amount of coins to subtract are tweakable
-                if (loosecoinChance <= 4) {
-                    client.economy.dec(key, CoinEventLoss, "coins");
-                    message.channel.send(randomLooseMsg);
-                }
-                //? Here we determine the chance of a coin win to happen when chatting
-                var wincoinChance = Math.floor[Math.random() * coinwinchance] + 1;
-                // Here we define some arrays to select a random message to send when an user gets a coin win
-                var wincoinMsg = [
-                    `${message.author.username} found a lost wallet! There was ${CoinEventWin} coins inside`,
-                    `${message.author.username} looked under a rock and found ${CoinEventWin} coins`,
-                    `${message.author.username} was greeted by Shrek in his swamp with ${CoinEventWin} coins`,
-                    `While nerding on minecraft, ${message.author.username} found ${CoinEventWin} coins in a shipwreck`,
-                    `A nice commie shared his ${Math.floor(CoinEventWin * 2)} with ${message.author.username}, now they both have ${CoinEventWin} coins`
-                ];
-                var randomWinMsg = wincoinMsg[Math.floor(Math.random() * wincoinMsg.length)];
-                // Here there is the logic for the actual coin win
-                // This can be modified in the config and can be tweaked to be more or less rare to happen
-                // Also, the amount of coins to add to the wallet are tweakable
-                if (wincoinChance <= 6) {
-                    client.economy.inc(key, CoinEventWin, "coins");
-                    message.channel.send(randomWinMsg);
-                }
             }
             // ? Help message on mention
             if (message.mentions.has(client.user)) {
@@ -162,9 +123,6 @@ class MessageEvent extends BaseEvent_1.default {
                     .setDescription(`I saw you were screaming **${message.author.username}**, so here's my prefix: ` + "`" + `${client.prefix}` + "`");
                 message.channel.send(emb);
             }
-            // ? DM support system
-            // Work in progress
-            const logg = client.channels.cache.get('755135782573965374');
             // ? Auto-response algorithm
             switch (message.content.toLowerCase()) {
                 case 'i deserve coffee':
@@ -193,7 +151,7 @@ class MessageEvent extends BaseEvent_1.default {
                 case 'reddit moment':
                     message.channel.send("here's your reddit gold, retard");
                     break;
-                case 'poggers' || 'pog':
+                case 'poggers':
                     // Special thing for N2005
                     if (message.author.id === '324547646033494016') {
                         const member = yield message.guild.members.fetch('324547646033494016');
@@ -203,6 +161,13 @@ class MessageEvent extends BaseEvent_1.default {
                     else {
                         message.channel.send("poggers");
                     }
+                    break;
+                case 'niggers':
+                    message.channel.send(":flushed:");
+                    break;
+                case 'no cap':
+                    message.channel.send("IT'S ALL CAPS U INSTAGRAM THOT");
+                    break;
             }
             process.on("UnhandledPromiseRejection", (e) => {
                 console.log(chalk.red("[!] ") + chalk.bgRed("UnhandledPromiseRejection: ") + e);

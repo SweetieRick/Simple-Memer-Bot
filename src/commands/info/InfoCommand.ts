@@ -10,18 +10,14 @@ export default class InfoCommand extends BaseCommand {
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
+    const emb = new MessageEmbed()
+      .setAuthor(`${message.author.username}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+      .setTitle("Info Page")
+      .addField("**Codekeeper**", `SweetieRick#6931`)
+      .addField("**Library**", `Discord.js ^12.3.1`)
+      .addField("**Useful Links**", `[Support Server](https://discord.gg/QbAFBj9) \n[Command List](about:blank) \n[Source Code](https://github.com/SweetieRick/Simple-Memer-Bot/tree/master)`)
+      .setColor(0xa3ae7e)
 
-    let infos = new MessageEmbed()
-        .setAuthor(`${client.user.username}`, `${client.user.displayAvatarURL({dynamic: true})}`)
-        .setDescription(`As you invoked me, now you can see the stuff I can do. To start off, you should see what commands I can run by saying **${client.prefix}help**. If you want more info about me, just run **${client.prefix}info**. Apart all, be sure to have fun trying me!`)
-        .addField("What is my prefix?", `${client.prefix}`)
-        .addField("Bot library", `discord.js 1.12.1`)
-        .addField("Bot Version", "1.4")
-        .addField("Uptime", `${functions.getLastRestart()}`)
-        .addField("Collaborators", "TheRealJT, Candy, Shrek")
-        .addField("Commands", `${client.commands.array().length} loaded`)
-        .setColor(0xa3ae7e)
-        .setFooter("Bot made by SweetieRick. This bot is a special version of the known bot SimpleMemerBot made only for this server!");
-    message.channel.send(infos)
+      message.channel.send(emb)
   }
 }

@@ -13,6 +13,9 @@ export default class EmojiCommand extends BaseCommand {
       case 'nwodtleM':
         message.channel.send("<a:nwodtleM:763851515399897090>")
         break;
+      case 'tada':
+        message.channel.send(`<a:tada:829672866681061406>`)
+        break;
 
       // These are the normal emojis with a funny twist
       case 'banhammer':

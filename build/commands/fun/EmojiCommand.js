@@ -20,15 +20,22 @@ class EmojiCommand extends BaseCommand_1.default {
     run(client, message, args) {
         return __awaiter(this, void 0, void 0, function* () {
             switch (args[0]) {
+                // These are animated emojis
                 case 'nwodtleM':
                     message.channel.send("<a:nwodtleM:763851515399897090>");
                     break;
+                case 'tada':
+                    message.channel.send(`<a:tada:829672866681061406>`);
+                    break;
+                // These are the normal emojis with a funny twist
                 case 'banhammer':
                     message.channel.send("<:banhammer_gulag:797031116573114399> Behold, the mighty ban hammer!");
                     break;
                 case 'bonk':
                     message.channel.send(":boom: <:banhammer_gulag:797031116573114399>");
                     break;
+                case 'drip':
+                    message.channel.send("Their only fear is your drip <:goku_drip:797032832857538560>");
             }
         });
     }

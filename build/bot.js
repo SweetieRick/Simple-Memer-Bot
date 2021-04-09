@@ -12,11 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.cooldownUserList = void 0;
 const dotenv_1 = require("dotenv");
 dotenv_1.config();
 const registry_1 = require("./utils/registry");
 const client_1 = __importDefault(require("./client/client"));
 const client = new client_1.default({});
+exports.cooldownUserList = new Set();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     client.prefix = process.env.DISCORD_BOT_PREFIX || client.prefix;
     yield registry_1.registerCommands(client, "../commands");

@@ -2,9 +2,9 @@ import { Message, MessageEmbed } from 'discord.js';
 import BaseCommand from '../../utils/structures/BaseCommand';
 import DiscordClient from '../../client/client';
 
-export default class PrisonCommand extends BaseCommand {
+export default class GulagCommand extends BaseCommand {
   constructor() {
-    super('prison', 'moderation', ["kick"]);
+    super('gulag', 'moderation', ["kick"]);
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
